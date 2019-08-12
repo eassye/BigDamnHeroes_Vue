@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import Species from '@/components/Species'
 import Profile from '@/components/Profile'
 import Callback from '@/components/Callback'
 
@@ -12,9 +12,9 @@ const router = new Router ({
     mode: 'history',
     routes: [
         {
-            path: '/',
-            name: 'Hello',
-            component: HelloWorld
+            path: '/Species',
+            name: 'Species',
+            component: Species
         },
         {
             path: '/profile',

@@ -1,25 +1,18 @@
 <template>
   <div id="app">
+    <b-navbar type="dark" variant="dark">
+      <b-navbar-brand href="#">Big Damn Heroes</b-navbar-brand>
+      <b-navbar-nav class="ml-auto">
+        <b-nav-item v-if="!isAuthenticated" href="#" @click.prevent="login">Login</b-nav-item>
+        <b-nav-item-dropdown v-if="isAuthenticated" v-bind:text="profile.name" right>
+          <b-dropdown-item href="#" @click.prevent="logout">Log Out</b-dropdown-item>
+        </b-nav-item-dropdown>
+      </b-navbar-nav>
+    </b-navbar>
     <img alt="Vue logo" src="./assets/logo.png">
-    <nav>
-      <div>
-        <a href="#">Auth0 - Vue</a>
-      </div>
-
-      <ul>
-        <li>
-          <router-link to="/">Home</router-link>
-        </li>
-        <li v-if="!isAuthenticated">
-          <a href="#" @click.prevent="login">Login</a>
-        </li>
-        <li v-if="isAuthenticated">
-          <a href="#" @click.prevent="logout">Log out</a>
-        </li>
-      </ul>
-  </nav>
-    <router-link to="/">HelloWorld</router-link>
-    <router-link to="Profile">Profile</router-link>
+    <div> 
+      <router-link to="/species">HelloWorld</router-link>
+    </div>
     <router-view/>
   </div>
 </template>
@@ -29,7 +22,8 @@ export default {
   name: 'app',
   data() {
     return {
-      isAuthenticated: false
+      isAuthenticated: false,
+      profile: this.$auth.profile
     };
   },
   async created() {
@@ -62,6 +56,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
