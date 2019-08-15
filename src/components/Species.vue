@@ -1,32 +1,40 @@
 <template>
   <div class="hello">
     <h3>Species</h3>
-
     <div>
-      <b-dropdown id="dropdown-1" text="Select Your Species" class="m-md-2" v-model="selectedSpecie">
-        <b-dropdown-item v-for="specie in species" v-bind:key="specie.id"> {{ specie}} </b-dropdown-item>
-      </b-dropdown>
-    </div>
+      <div>
+        <b-form-select v-model="selected" :options="species" @change="onClick($event)"></b-form-select>
 
-    <p>You selected: {{ selectedSpecie }}</p>
+        <div class="mt-3">
+          Selected:
+          <strong>{{ selected }}</strong>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-  export default{
-    data() {
-      return {
-        selectedSpecie: "",
-        species: [
-          "Human",
-          "Eldar",
-          "Ork",
-          "Adeptus Astartes",
-          "Primaris Astartes"
-        ]
-      }
+export default {
+  data() {
+    return {
+      selected: null,
+      species: [
+        "Human",
+        "Eldar",
+        "Ork",
+        "Adeptus Astartes",
+        "Primaris Astartes"
+      ]
+    };
+  },
+  methods: {
+    onClick(event) {
+      // eslint-disable-next-line
+      console.log("Event: ", event);
     }
   }
+};
 </script>
 
 <style scoped>
