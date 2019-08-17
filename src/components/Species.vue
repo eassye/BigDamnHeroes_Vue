@@ -3,11 +3,14 @@
     <h3>Species</h3>
     <div>
       <div>
-        <b-form-select v-model="selected" :options="species" @change="onClick($event)"></b-form-select>
+        <!-- <b-form-select v-model="selected" :options="`${species}`" @change="onClick($event)"> -->
+        <b-form-select v-model="selected" @change="onClick($event)">
+          <option v-for="specie in species" :value="specie.value" v-bind:key="specie">{{ specie.value }}</option>
+        </b-form-select>
 
         <div class="mt-3">
           Selected:
-          <strong>{{ selected }}</strong>
+          <strong>{{ selected.value }}</strong>
         </div>
       </div>
     </div>
@@ -16,21 +19,19 @@
 
 <script>
 export default {
+  /* eslint-disable */
+ computed: {
+    species(){
+      return this.$store.state.species;
+    }
+  },
   data() {
     return {
       selected: null,
-      species: [
-        "Human",
-        "Eldar",
-        "Ork",
-        "Adeptus Astartes",
-        "Primaris Astartes"
-      ]
     };
   },
   methods: {
     onClick(event) {
-      // eslint-disable-next-line
       console.log("Event: ", event);
     }
   }

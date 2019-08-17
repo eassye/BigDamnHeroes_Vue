@@ -5,6 +5,7 @@ import AuthPlugin from './plugins/auth'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import { store } from './store/store'
 
 
 Vue.use(AuthPlugin)
@@ -12,6 +13,7 @@ Vue.use(BootstrapVue)
 Vue.config.productionTip = false
 
 new Vue({
+  store: store,
   render: h => h(App),
   router,
 }).$mount('#app')

@@ -11,7 +11,7 @@
     </b-navbar>
     <img alt="Vue logo" src="./assets/logo.png">
     <div> 
-      <router-link to="/species">HelloWorld</router-link>
+      <router-link to="/species">Species</router-link>
     </div>
     <router-view/>
   </div>
