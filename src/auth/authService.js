@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import auth0 from 'auth0-js';
 import EventEmitter from 'events';
 import authConfig from '../configs/auth_config.json';
@@ -31,8 +33,10 @@ class AuthService extends EventEmitter {
         return new Promise((resolve, reject) => {
             webAuth.parseHash((err, authResult) => {
                 if (err) {
+                    console.log('handleAuthentication TOKENS ERROR: ', err);
                     reject(err);
                 } else {
+                    console.log('handleAuthentication We here: ', authResult);
                     this.localLogin(authResult);
                     resolve(authResult.idToken);
                 }
@@ -47,7 +51,7 @@ class AuthService extends EventEmitter {
         this.accessToken = authResult.accessToken;
         this.accessTokenExpiry = new Date(Date.now() + authResult.expiresIn * 1000);
 
-        localStorage.setItem(localStorageKey, 'true');
+        localStorage.setItem(localStorageKey, true);
 
         this.emit(loginEvent, {
             loggedIn: true,
@@ -58,14 +62,17 @@ class AuthService extends EventEmitter {
 
     renewTokens() {
         return new Promise((resolve, reject) => {
-            if (localStorage.getItem(localStorageKey) !== "true") {
+            if (!localStorage.getItem(localStorageKey)) {
+                console.log('RENEW TOKENS ERROR');
                 return reject("Not logged in");
             }
 
             webAuth.checkSession({}, (err, authResult) => {
                 if (err) {
+                    console.log('RENEW TOKENS ERROR: ', err);
                     reject(err);
                 } else {
+                    console.log('checkSession: ', authResult);
                     this.localLogin(authResult);
                     resolve(authResult);
                 }
@@ -79,7 +86,7 @@ class AuthService extends EventEmitter {
         this.idToken = null;
         this.tokenExpiry = null;
         this.profile = null;
-        // eslint-disable-next-line
+
         console.log(`${window.location.origin}`)
         webAuth.logout({
             returnTo: `${window.location.origin}/`

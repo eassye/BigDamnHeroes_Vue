@@ -1,16 +1,15 @@
 <template>
-  <div class="hello">
+  <div>
     <h3>Species</h3>
     <div>
       <div>
-        <!-- <b-form-select v-model="selected" :options="`${species}`" @change="onClick($event)"> -->
         <b-form-select v-model="selected" @change="onClick($event)">
-          <option v-for="specie in species" :value="specie.value" v-bind:key="specie">{{ specie.value }}</option>
+          <option v-for="specie in species" :value="specie.value" v-bind:key="specie.key">{{ specie.value }}</option>
         </b-form-select>
 
         <div class="mt-3">
           Selected:
-          <strong>{{ selected.value }}</strong>
+          <strong>{{ selected }}</strong>
         </div>
       </div>
     </div>

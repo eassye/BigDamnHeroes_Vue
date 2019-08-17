@@ -28,7 +28,9 @@ export default {
   },
   async created() {
     try {
-      await this.$auth.renewTokens();
+       // eslint-disable-next-line
+      console.log('ARE WE HERE?');
+      return await this.$auth.renewTokens();
     } catch (e) {
       // eslint-disable-next-line
       console.log(e);
