@@ -32,6 +32,8 @@ export default {
   methods: {
     onClick(event) {
       console.log("Event: ", event);
+      this.$store.commit('addSpecie', this.selected);
+      this.selected = "";
     }
   }
 };
